@@ -52,26 +52,43 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.2rem 5vw;
-    background: rgba(250,246,238,0.88);
+    padding: 0.9rem 5vw;
+    background: rgba(250,246,238,0.94);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
     transition: all 0.3s ease;
   }
 
+  /* ---- Logo image styles (replaces text) ---- */
   .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--saffron-deep);
-    letter-spacing: 0.03em;
-    text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    text-decoration: none;
   }
 
-  .nav-logo span { color: var(--gold); }
+  .logo-img {
+    height: 56px;
+    width: auto;
+    display: block;
+    transition: transform 0.2s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+  }
+
+  .logo-img:hover {
+    transform: scale(1.02);
+  }
+
+  /* For extra small screens, slightly reduce logo size if needed */
+  @media (max-width: 600px) {
+    .logo-img {
+      height: 48px;
+    }
+  }
+  @media (max-width: 450px) {
+    .logo-img {
+      height: 42px;
+    }
+  }
 
   .nav-links {
     display: flex;
@@ -546,15 +563,19 @@
 <body>
 
 <nav>
-  <a href="#" class="nav-logo">🪔 Maha <span>Poojan</span></a>
+  <!-- REPLACED TEXT LOGO WITH IMAGE LOGO using inline SVG data URI from the provided design -->
+ <a href="index.html" class="nav-logo" aria-label="MahaPoojan Home">
+    <img class="logo-img" src="WhatsApp%20Image%202026-06-04%20at%2011.55.34.jpeg" alt="MahaPoojan Logo">
+</a>
+  </a>
   <ul class="nav-links">
-    <li><a href="#">Puja Seva</a></li>
-    <li><a href="#">Chadhava</a></li>
-    <li><a href="#">Temples</a></li>
-    <li><a href="#">Panchang</a></li>
-    <li><a href="#">Horoscope</a></li>
-    <li><a href="#" class="active">About</a></li>
-    <li><a href="#" class="nav-cta">Book Puja</a></li>
+    <li><a href="puja.html">Puja Seva</a></li>
+    <li><a href="chadhava.html">Chadhava</a></li>
+    <li><a href="temples.html">Temples</a></li>
+    <li><a href="panchang.html">Panchang</a></li>
+    <li><a href="Horoscope.html">Horoscope</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="puja booking.html" class="nav-cta">Book Puja</a></li>
   </ul>
 </nav>
 
@@ -575,33 +596,17 @@
     <div class="mission-content fade-up">
       <span class="section-eyebrow">Our Dharma</span>
       <h2 class="mission-title">To Make Every Hindu Feel <em>Spiritually Present</em> — No Matter the Miles</h2>
-      <p class="mission-text">We partner with 100+ sacred temples across India — from the ghats of Varanasi to the hills of Tirumala — to bring live darshan, authentic pujas, and prasad to your doorstep. With over 30 million devotees in 30+ countries, MahaPoojan is the largest and most trusted devotional ecosystem.</p>
-      <p class="mission-text">Our technology is guided by tradition. Every ritual is performed by temple priests according to Vedic standards, and we provide video proof, real-time updates, and sanctified prasad shipped globally.</p>
+      <p class="mission-text">We're new, we're small, and we're full of heart. MahaPoojan was born because we believe that everyone — from curious teenagers exploring meditation to grandparents who've never missed a Tuesday fast — deserves access to authentic pujas, genuine priests, and the peace that comes from faith. No judgment. No complexity. Just devotion, made simple.</p>
+`     <p class="mission-text">Whether you're taking your first step toward spirituality or have walked this    path for decades, you belong here. We're building a community where tradition meets warmth, where every question is welcomed, and where every prayer is honored — no matter how big or small.</p>
+
       <div class="mission-stats">
-        <div class="stat-bubble"><div class="stat-number">30M+</div><div class="stat-label">Devotees</div></div>
         <div class="stat-bubble"><div class="stat-number">100+</div><div class="stat-label">Partner Temples</div></div>
-        <div class="stat-bubble"><div class="stat-number">30+</div><div class="stat-label">Countries</div></div>
+        <div class="stat-bubble"><div class="stat-number">20+</div><div class="stat-label">Countries</div></div>
       </div>
     </div>
-    <div class="mission-visual fade-up">
-      <div class="mission-icon">🕉️🔱🪔</div>
-      <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--gold);">“वसुधैव कुटुम्बकम्”</div>
-      <div style="font-size:0.75rem; color:rgba(255,255,255,0.5); margin-top:0.8rem;">The world is one family — united by faith.</div>
-    </div>
-  </div>
-</section>
-
-<!-- Journey Timeline -->
-<section class="journey">
-  <div class="section-header fade-up">
-    <span class="section-eyebrow">Our Journey</span>
-    <h2 class="section-title">From <em>Faith</em> to a Movement</h2>
-  </div>
-  <div class="timeline">
-    <div class="timeline-card fade-up"><div class="timeline-year">2016</div><div class="timeline-title">The First Light</div><div class="timeline-desc">MahaPoojan began as a small team of devotees determined to digitalise temple access for NRIs.</div></div>
-    <div class="timeline-card fade-up"><div class="timeline-year">2018</div><div class="timeline-title">10+ Temples Onboard</div><div class="timeline-desc">Live darshan from Kashi Vishwanath and Tirupati became available for first time globally.</div></div>
-    <div class="timeline-card fade-up"><div class="timeline-year">2021</div><div class="timeline-title">5M Devotees</div><div class="timeline-desc">Expanded to 50+ temples, launched prasad shipping to 20 countries.</div></div>
-    <div class="timeline-card fade-up"><div class="timeline-year">2024</div><div class="timeline-title">Global Faith Hub</div><div class="timeline-desc">30M+ downloads, ISO 27001 certified, recognitions from Ministry of Culture.</div></div>
+    <div class="mission-visual fade-up" style="background: linear-gradient(145deg, #2A1A06, #1A0C02); border-radius: 2rem; padding: 2rem; text-align: center; border: 1px solid rgba(212,168,83,0.2);">
+    <img src="WhatsApp Image 2026-06-04 at 11.55.34.jpeg" alt="MahaPoojan Logo" style="max-width: 100%; height: auto;">
+</div>
   </div>
 </section>
 
@@ -625,16 +630,23 @@
     <h2 class="section-title">Meet the <em>Team</em></h2>
   </div>
   <div class="team-grid">
-    <div class="team-card fade-up"><div class="team-avatar">🕉️</div><div class="team-info"><div class="team-name">Prashant Agarwal</div><div class="team-role">Co-Founder & CEO</div><div class="team-bio">Former tech entrepreneur driven to reimagine spiritual access for the modern Hindu diaspora.</div></div></div>
-    <div class="team-card fade-up"><div class="team-avatar">📿</div><div class="team-info"><div class="team-name">Pt. Govind Shastri</div><div class="team-role">Chief Priest & Advisor</div><div class="team-bio">40+ years of Vedic experience, ensuring all rituals follow authentic Agama and Puranic standards.</div></div></div>
-    <div class="team-card fade-up"><div class="team-avatar">🌺</div><div class="team-info"><div class="team-name">Anjali Reddy</div><div class="team-role">Head of Devotee Experience</div><div class="team-bio">Leads the global support team that brings blessings to devotees in 30+ countries.</div></div></div>
+   <div class="team-card fade-up">
+    <div class="team-avatar">🕉️</div>
+    <div class="team-info">
+        <div class="team-name">Acharya Deepak Sharma Ji</div>
+        <div class="team-role">Founder & CEO</div>
+        <div class="team-bio">Astrologer, Vastu Specialist, Ved & Vedant Practitioner. On a mission to bridge ancient wisdom with modern hearts.</div>
+    </div>
+</div>
+    <div class="team-card fade-up"><div class="team-avatar">📿</div><div class="team-info"><div class="team-name">Pt. Haridwar Sharma Ji</div><div class="team-role">Chief Priest & Advisor</div><div class="team-bio">20+ years of Vedic experience, ensuring all rituals follow authentic Agama and Puranic standards.</div></div></div>
+    <div class="team-card fade-up"><div class="team-avatar">🌺</div><div class="team-info"><div class="team-name">Mrs. Jyoti Sharma Ji</div><div class="team-role">Head of Devotee Experience</div><div class="team-bio">Leads the global support team that brings blessings to devotees </div></div></div>
   </div>
 </section>
 
 <!-- Impact + CTA -->
 <section class="join-cta">
   <div class="fade-up">
-    <h2 class="join-title">Join the <em>Family of 30 Million</em></h2>
+    <h2 class="join-title">Join the <em>Family of Spiritual Light</em></h2>
     <p class="join-text">Be part of a movement that keeps the sacred flame of Indian temples alive — wherever life has taken you.</p>
     <a href="#" class="btn-primary">Download MahaPoojan App →</a>
   </div>
@@ -643,12 +655,12 @@
 <!-- Footer -->
 <footer>
   <div class="footer-grid">
-    <div><div class="footer-brand-name">🪔 MahaPoojan</div><p class="footer-tagline">India's largest devotional platform, connecting 30 million Hindus worldwide to their faith and sacred temples.</p></div>
-    <div><div class="footer-heading">About</div><ul class="footer-links"><li><a href="#">Our Story</a></li><li><a href="#">Team</a></li><li><a href="#">Press</a></li><li><a href="#">Careers</a></li></ul></div>
-    <div><div class="footer-heading">Services</div><ul class="footer-links"><li><a href="#">Puja Seva</a></li><li><a href="#">Live Darshan</a></li><li><a href="#">Chadhava</a></li><li><a href="#">Panchang</a></li></ul></div>
-    <div><div class="footer-heading">Support</div><ul class="footer-links"><li><a href="#">Help Center</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li><li><a href="#">Contact</a></li></ul></div>
+    <div><div class="footer-brand-name">🪔 MahaPoojan</div><p class="footer-tagline">India's largest devotional platform, connecting All Hindus worldwide to their faith and sacred temples.</p></div>
+    <div><div class="footer-heading">About</div><ul class="footer-links"><li><a href="good.html">Our Story</a></li><li><a href="good.html">Team</a></li><li><a href="good.html">Press</a></li><li><a href="good.html">Careers</a></li></ul></div>
+    <div><div class="footer-heading">Services</div><ul class="footer-links"><li><a href="puja.html">Puja Seva</a></li><li><a href="darshan.html">Live Darshan</a></li><li><a href="chadhava.html">Chadhava</a></li><li><a href="panchang.html">Panchang</a></li></ul></div>
+    <div><div class="footer-heading">Support</div><ul class="footer-links"><li><a href="legal.html">Help Center</a></li><li><a href="legal.html">Privacy Policy</a></li><li><a href="legal.html">Terms of Use</a></li><li><a href="legal.html">Contact</a></li></ul></div>
   </div>
-  <div class="footer-bottom"><div>© 2026 MahaPoojan, Inc. · Firstprinciple AppsForBharat Pvt. Ltd., Bengaluru</div><div class="footer-certifications"><span class="cert-badge">ISO 27001</span><span class="cert-badge">Digital India</span><span class="cert-badge">Razorpay Secured</span></div></div>
+  <div class="footer-bottom"><div>© 2026 MahaPoojan, Inc.</div><div class="footer-certifications">
 </footer>
 
 <script>
