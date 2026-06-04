@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MahaPoojan — Book a Puja | Sacred Rituals Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --saffron: #C6721B;
+    --saffron-deep: #9E4F08;
+    --saffron-light: #F5C77E;
+    --saffron-pale: #FDF3E4;
+    --gold: #D4A853;
+    --gold-light: #F2E2B0;
+    --cream: #FAF6EE;
+    --ink: #1A1208;
+    --ink-mid: #3D2D12;
+    --ink-soft: #7A6040;
+    --red-temple: #8B2020;
+    --white: #FFFFFF;
+    --border: rgba(198,114,27,0.18);
+    --green-success: #2E7D32;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 5vw;
+    background: rgba(250,246,238,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--saffron-deep);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--saffron); }
+  .nav-links a.active { color: var(--saffron); border-bottom: 1px solid var(--saffron); padding-bottom: 0.2rem; }
+  .nav-cta {
+    background: var(--saffron);
+    color: white !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 2rem;
+  }
+  .nav-cta:hover { background: var(--saffron-deep); }
+
+  /* booking hero */
+  .booking-hero {
+    padding: 10rem 5vw 4rem;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(198,114,27,0.03) 0%, rgba(26,18,8,0.02) 100%);
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 1rem;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '';
+    width: 2rem;
+    height: 1px;
+    background: var(--saffron);
+  }
+  .hero-eyebrow::before { margin-right: 0.6rem; }
+  .hero-eyebrow::after { margin-left: 0.6rem; }
+  .booking-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .booking-title em { font-style: italic; color: var(--saffron-deep); }
+  .booking-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 550px;
+    margin: 0 auto;
+  }
+
+  /* main booking grid */
+  .booking-container {
+    max-width: 1300px;
+    margin: 2rem auto 5rem;
+    padding: 0 5vw;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+  }
+
+  /* puja selection cards */
+  .puja-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .puja-option {
+    background: white;
+    border-radius: 1.2rem;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .puja-option:hover {
+    border-color: var(--saffron);
+    transform: translateX(4px);
+  }
+  .puja-option.selected {
+    border-left: 5px solid var(--saffron);
+    background: var(--saffron-pale);
+    border-color: var(--saffron);
+  }
+  .puja-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+  .puja-meta {
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+  }
+  .puja-price {
+    font-weight: 600;
+    color: var(--saffron-deep);
+    font-size: 1.1rem;
+  }
+
+  /* booking form */
+  .booking-form-card {
+    background: white;
+    border-radius: 1.8rem;
+    box-shadow: 0 25px 50px rgba(26,18,8,0.08);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: sticky;
+    top: 100px;
+  }
+  .form-header {
+    background: linear-gradient(115deg, var(--ink) 0%, #2E2316 100%);
+    padding: 1.5rem 2rem;
+    color: white;
+  }
+  .form-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+  }
+  .form-header p {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin-top: 0.2rem;
+  }
+  .form-body {
+    padding: 2rem;
+  }
+  .input-group {
+    margin-bottom: 1.3rem;
+  }
+  .input-group label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink-mid);
+    margin-bottom: 0.4rem;
+  }
+  .input-group input, .input-group select, .input-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    transition: 0.2s;
+    font-size: 0.9rem;
+  }
+  .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+    outline: none;
+    border-color: var(--saffron);
+    box-shadow: 0 0 0 2px rgba(198,114,27,0.1);
+  }
+  .name-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .price-breakdown {
+    background: var(--saffron-pale);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  .total-row {
+    border-top: 1px solid rgba(0,0,0,0.1);
+    margin-top: 0.5rem;
+    padding-top: 0.7rem;
+    font-weight: 700;
+    color: var(--saffron-deep);
+  }
+  .btn-book {
+    width: 100%;
+    background: var(--saffron);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+  }
+  .btn-book:hover {
+    background: var(--saffron-deep);
+    transform: translateY(-2px);
+  }
+  .trust-badge {
+    text-align: center;
+    margin-top: 1.2rem;
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* success modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-card {
+    background: white;
+    max-width: 400px;
+    width: 90%;
+    border-radius: 2rem;
+    text-align: center;
+    padding: 2rem;
+    animation: fadeInUp 0.3s ease;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+  }
+  .modal-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .modal-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  .modal-card p {
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+  }
+  .modal-close {
+    background: var(--saffron);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+  }
+
+  /* featured pujas strip */
+  .featured-strip {
+    background: var(--ink);
+    padding: 1.2rem 5vw;
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .featured-strip span {
+    color: var(--gold);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  footer {
+    background: #0F0A04;
+    padding: 3rem 5vw 2rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+  }
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--saffron-light);
+  }
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .footer-links a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    font-size: 0.8rem;
+  }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 900px) {
+    .booking-container { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .name-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+  .fade-up { opacity: 0; transform: translateY(25px); transition: all 0.7s; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">🪔 Maha <span>Poojan</span></a>
+  <ul class="nav-links">
+    <li><a href="#">Puja Seva</a></li>
+    <li><a href="#">Chadhava</a></li>
+    <li><a href="#">Temples</a></li>
+    <li><a href="#">Panchang</a></li>
+    <li><a href="#">Horoscope</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#" class="nav-cta active">Book Puja</a></li>
+  </ul>
+</nav>
+
+<section class="booking-hero fade-up">
+  <div class="hero-eyebrow">Book a Puja</div>
+  <h1 class="booking-title">Let Your <em>Prayers</em> Reach the Divine</h1>
+  <p class="booking-sub">Choose a sacred ritual, and our temple priests will perform it on your behalf — with live video proof and prasad shipped worldwide.</p>
+</section>
+
+<div class="featured-strip">
+  <span>🔱 Satyanarayan Puja</span> <span>🪔 Maha Mrityunjaya</span> <span>🌸 Durga Saptashati</span> <span>📿 Rudra Abhishek</span> <span>🕉️ Graha Shanti</span>
+</div>
+
+<div class="booking-container">
+  <!-- Left: Puja selection -->
+  <div class="puja-list fade-up">
+    <div class="puja-option selected" data-puja="satyanarayan" data-price="1100" data-name="Satyanarayan Puja" data-temple="Kashi Vishwanath">
+      <div class="puja-info"><h3>🪔 Satyanarayan Puja</h3><div class="puja-meta">Kashi Vishwanath Temple · 2 Hrs</div></div>
+      <div class="puja-price">₹1,100</div>
+    </div>
+    <div class="puja-option" data-puja="mrityunjaya" data-price="2100" data-name="Maha Mrityunjaya Puja" data-temple="Mahakaleshwar, Ujjain">
+      <div class="puja-info"><h3>🔱 Maha Mrityunjaya Puja</h3><div class="puja-meta">Mahakaleshwar · 108 Jaap</div></div>
+      <div class="puja-price">₹2,100</div>
+    </div>
+    <div class="puja-option" data-puja="rudra" data-price="3100" data-name="Rudra Abhishekam" data-temple="Somnath Temple">
+      <div class="puja-info"><h3>📿 Rudra Abhishekam</h3><div class="puja-meta">Somnath Jyotirlinga · 11 Priests</div></div>
+      <div class="puja-price">₹3,100</div>
+    </div>
+    <div class="puja-option" data-puja="durga" data-price="2500" data-name="Durga Saptashati Path" data-temple="Vaishno Devi Mandir">
+      <div class="puja-info"><h3>🌸 Durga Saptashati Path</h3><div class="puja-meta">Vaishno Devi · 7 Days Recitation</div></div>
+      <div class="puja-price">₹2,500</div>
+    </div>
+    <div class="puja-option" data-puja="graha" data-price="1800" data-name="Graha Shanti Puja" data-temple="Navagraha Temple, Kumbakonam">
+      <div class="puja-info"><h3>⭐ Graha Shanti Puja</h3><div class="puja-meta">Navagraha Temple · Planetary Peace</div></div>
+      <div class="puja-price">₹1,800</div>
+    </div>
+  </div>
+
+  <!-- Right: Booking form -->
+  <div class="booking-form-card fade-up">
+    <div class="form-header">
+      <h3>Confirm Your Seva</h3>
+      <p>Fill the details — we'll perform the ritual in your name & gotra</p>
+    </div>
+    <div class="form-body">
+      <form id="bookingForm">
+        <div class="name-row">
+          <div class="input-group"><label>Your Name (as in Puja)</label><input type="text" id="devoteeName" required placeholder="e.g. Rajesh Sharma"></div>
+          <div class="input-group"><label>Gotra (if known)</label><input type="text" id="gotra" placeholder="Vashistha / Kaushika / None"></div>
+        </div>
+        <div class="input-group"><label>Email Address</label><input type="email" id="email" required placeholder="receipt & video proof"></div>
+        <div class="input-group"><label>Phone (WhatsApp for updates)</label><input type="tel" id="phone" required placeholder="+91 / +1"></div>
+        <div class="input-group"><label>Preferred Puja Date (optional)</label><input type="date" id="pujaDate"></div>
+        <div class="input-group"><label>Special Sankalp / Wishes</label><textarea rows="2" id="sankalp" placeholder="e.g. For family health, business growth, ancestral peace..."></textarea></div>
+        
+        <div class="price-breakdown" id="priceBox">
+          <div class="price-row"><span>Selected Puja:</span><span id="selectedPujaName">Satyanarayan Puja</span></div>
+          <div class="price-row"><span>Puja Fee:</span><span>₹<span id="pujaFee">1100</span></span></div>
+          <div class="price-row"><span>Prasad Shipping (Worldwide):</span><span>₹250</span></div>
+          <div class="price-row total-row"><span>Total Amount:</span><span>₹<span id="totalAmount">1350</span></span></div>
+        </div>
+        
+        <button type="submit" class="btn-book">Book Puja → Receive Video & Prasad</button>
+        <div class="trust-badge">
+          <span>🔒 100% Secure Payments</span> <span>📹 Live Video Proof</span> <span>🌎 Shipping 30+ Countries</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="successModal" class="modal-overlay">
+  <div class="modal-card">
+    <div class="modal-icon">🕉️✨</div>
+    <h4>Puja Booked Successfully!</h4>
+    <p>Your ritual confirmation has been sent to your email. You'll receive live video & prasad tracking within 2 days.</p>
+    <button class="modal-close" onclick="closeModal()">Jai Shri Ram 🙏</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-brand-name">🪔 MahaPoojan</div><p style="font-size:0.75rem; margin-top:0.5rem;">India's most trusted devotional platform since 2016</p></div>
+    <div><div class="footer-heading" style="font-weight:500; margin-bottom:0.5rem;">Quick Links</div><ul class="footer-links"><li><a href="#">About Us</a></li><li><a href="#">Temple Partners</a></li><li><a href="#">Refund Policy</a></li></ul></div>
+    <div><div class="footer-heading" style="font-weight:500; margin-bottom:0.5rem;">Contact</div><ul class="footer-links"><li><a href="#">support@MahaPoojan.com</a></li><li><a href="#">+91 80 4718 0666</a></li><li><a href="#">Bengaluru, India</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 MahaPoojan · AppsForBharat</span><span>ISO 27001 | PCI DSS Certified</span></div>
+</footer>
+
+<script>
+  // Puja selection logic
+  const pujaOptions = document.querySelectorAll('.puja-option');
+  const selectedPujaNameSpan = document.getElementById('selectedPujaName');
+  const pujaFeeSpan = document.getElementById('pujaFee');
+  const totalSpan = document.getElementById('totalAmount');
+  const shippingCost = 250;
+
+  function updateFormByPuja(element) {
+    // update active class
+    pujaOptions.forEach(opt => opt.classList.remove('selected'));
+    element.classList.add('selected');
+    
+    const price = parseInt(element.dataset.price);
+    const name = element.dataset.name;
+    selectedPujaNameSpan.innerText = name;
+    pujaFeeSpan.innerText = price;
+    totalSpan.innerText = price + shippingCost;
+  }
+
+  pujaOptions.forEach(opt => {
+    opt.addEventListener('click', () => {
+      updateFormByPuja(opt);
+    });
+  });
+
+  // handle booking form submission
+  const form = document.getElementById('bookingForm');
+  const modal = document.getElementById('successModal');
+
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    // simple validation
+    const name = document.getElementById('devoteeName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    if (!name || !email || !phone) {
+      alert("🙏 Please enter your name, email and phone number to complete the booking.");
+      return;
+    }
+    if (!email.includes('@')) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    // show modal
+    modal.style.display = 'flex';
+    // optional: reset form or keep data – just for demo
+    // in real scenario, you would send data to server
+  });
+
+  // close modal if click on overlay
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+
+  // fade-up observer
+  const faders = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  faders.forEach(el => observer.observe(el));
+
+  // nav shadow
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) nav.style.boxShadow = '0 4px 30px rgba(26,18,8,0.12)';
+    else nav.style.boxShadow = 'none';
+  });
+  
+  // pre-fill default total
+  updateFormByPuja(document.querySelector('.puja-option.selected'));
+</script>
+</body>
+</html>
